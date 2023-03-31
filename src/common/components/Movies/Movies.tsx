@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { avengersEndgame } from "@/common/utils/searchObj";
-import { VStack, Image, Box, Text, Flex, Wrap } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 
 interface Movie {
   Title: string;
@@ -51,6 +50,34 @@ function Movies() {
     // console.log("res: ", response.data);
   });
 
+  const handleAddFavorite = (movie: Movie) => {
+    console.log("movie: ", movie.imdbID);
+    const favoriteMovie: Movie = {
+      Title: movie.Title,
+      Year: movie.Year,
+      Poster: movie.Poster,
+      imdbID: movie.imdbID,
+    };
+    const movies: Movie[] = JSON.parse(localStorage.getItem("movie")!) || []; // Initialize with an empty array if 'movie' is not in localStorage
+    // If 'movie' is not in localStorage, add it
+    if (movies.length === 0) {
+      localStorage.setItem("movie", JSON.stringify([favoriteMovie]));
+    }
+    // If 'movie' is in localStorage, add current movie to the array
+    else {
+      if (
+        !movies.some(
+          (storedMovie: Movie) => storedMovie.imdbID === movie.imdbID
+        )
+      ) {
+        movies.push(favoriteMovie);
+        localStorage.setItem("movies", JSON.stringify(movies));
+      } else {
+        console.log("Movie already exists in favorites.");
+      }
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -92,10 +119,12 @@ function Movies() {
               {movie.Title}
             </Text>
             <Flex align="center" justify="space-between">
-              <Text fontSize="md" color="gray.500">
+              <Text fontSize="lg" color="gray.500">
                 {movie.Year}
               </Text>
-              <StarIcon color="yellow.500" boxSize="4" />
+              <Button fontSize="lg" onClick={() => handleAddFavorite(movie)}>
+                Favorite
+              </Button>
             </Flex>
           </Box>
         </VStack>
