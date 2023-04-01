@@ -3,13 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-
-interface Movie {
-  Title: string;
-  Year: string;
-  Poster: string;
-  imdbID: string;
-}
+import { Movie } from "@/common/types/types";
 
 interface DisplayMoviesProps {
   movies: Movie[];

@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { Movie } from "@/common/types/types";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
-
-interface Movie {
-  Title: string;
-  Year: string;
-  Type: string;
-  Poster: string;
-  imdbID: string;
-}
 
 function Movies() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -45,6 +38,7 @@ function Movies() {
     const favoriteMovie: Movie = {
       Title: movie.Title,
       Year: movie.Year,
+      Type: movie.Type,
       Poster: movie.Poster,
       imdbID: movie.imdbID,
     };
