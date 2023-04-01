@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/common/components/Navbar/Navbar";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
-
-interface Movie {
-  Title: string;
-  Year: string;
-  Poster: string;
-  imdbID: string;
-}
+import { Movie } from "@/common/types/types";
 
 export default function Favorites() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,10 +10,7 @@ export default function Favorites() {
     setMovies(JSON.parse(localStorage.getItem("localStorageMovies") || "[]"));
   }, []);
 
-  // TODO: FINISH THIS
   const handleRemoveFavorite = (movie: Movie) => {
-    // When clicking on the 'Remove' button, remove the movie from localStorage and update the state
-    console.log(movie);
     const filteredMovies: Movie[] = JSON.parse(
       localStorage.getItem("localStorageMovies") || "[]"
     ).filter(
