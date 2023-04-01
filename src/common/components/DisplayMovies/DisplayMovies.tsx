@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { avengersEndgame } from "@/common/utils/searchObj";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
@@ -67,7 +66,6 @@ const DisplayMovies = ({
               <Text fontSize="lg" color="gray.500">
                 {movie.Year}
               </Text>
-              {/* If on /favorites URL change button to Remove or Remove from Favorites */}
               <Button fontSize="lg" onClick={() => handleClickFavorite!(movie)}>
                 {DisplayButtonText}
               </Button>

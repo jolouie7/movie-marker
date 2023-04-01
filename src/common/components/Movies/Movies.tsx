@@ -1,54 +1,44 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { avengersEndgame } from "@/common/utils/searchObj";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 
 interface Movie {
   Title: string;
   Year: string;
+  Type: string;
   Poster: string;
   imdbID: string;
 }
 
 function Movies() {
-  const [movies, setMovies] = useState<Movie[]>(avengersEndgame.Search);
-  const { isLoading, isError, data, error } = useQuery("movies", async () => {
-    // const options = {
-    //   method: "GET",
-    //   headers: {
-    //     "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-    //     "X-RapidAPI-Host": "movie-database-alternative.p.rapidapi.com",
-    //   },
-    // };
-    // W/ Axios
-    // const response = await axios.get(
-    //   "https://movie-database-alternative.p.rapidapi.com/",
-    //   {
-    //     params: { s: "Avengers Endgame", r: "json", page: "1" },
-    //     headers: {
-    //       "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-    //       "X-RapidAPI-Host": "movie-database-alternative.p.rapidapi.com",
-    //     },
-    //   }
-    // );
-    // const { data } = await axios.get(
-    //   "/api/movies?searchTerm=Avengers%20Endgame"
-    // );
-    // console.log(data);
-    // const res = await fetch(
-    //   "https://movie-database-alternative.p.rapidapi.com/?s=Avengers%20Endgame&r=json&page=1",
-    //   options
-    // );
-    // const response = await res.json();
-    // try {
-    // setMovies(response.data.Search);
-    // console.log("res: ", response);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // console.log("res: ", response.data);
-  });
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const getMovies = async () => {
+    try {
+      const response = await axios.get(
+        "https://movie-database-alternative.p.rapidapi.com/",
+        {
+          params: {
+            s: "spiderman",
+            r: "json",
+            page: 1,
+          },
+          headers: {
+            "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
+            "X-RapidAPI-Host": "movie-database-alternative.p.rapidapi.com",
+          },
+        }
+      );
+      setMovies(response.data.Search);
+      return response.data.Search;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const { data, error, isLoading, isError } = useQuery("movies", getMovies);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   const handleAddFavorite = (movie: Movie) => {
     console.log("movie: ", movie.imdbID);
@@ -58,10 +48,15 @@ function Movies() {
       Poster: movie.Poster,
       imdbID: movie.imdbID,
     };
-    const movies: Movie[] = JSON.parse(localStorage.getItem("movie")!) || []; // Initialize with an empty array if 'movie' is not in localStorage
+    const movies: Movie[] = JSON.parse(
+      localStorage.getItem("localStorageMovies") || "[]"
+    );
     // If 'movie' is not in localStorage, add it
     if (movies.length === 0) {
-      localStorage.setItem("movie", JSON.stringify([favoriteMovie]));
+      localStorage.setItem(
+        "localStorageMovies",
+        JSON.stringify([favoriteMovie])
+      );
     }
     // If 'movie' is in localStorage, add current movie to the array
     else {
@@ -71,20 +66,12 @@ function Movies() {
         )
       ) {
         movies.push(favoriteMovie);
-        localStorage.setItem("movies", JSON.stringify(movies));
+        localStorage.setItem("localStorageMovies", JSON.stringify(movies));
       } else {
         console.log("Movie already exists in favorites.");
       }
     }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
 
   return (
     <Wrap spacing={5} justify="center">
@@ -95,6 +82,7 @@ function Movies() {
           borderRadius="md"
           width="100%"
           maxWidth="400px"
+          maxHeight="400px"
         >
           {movie.Poster === "N/A" || movie.Poster === "" ? (
             <Image
@@ -110,8 +98,8 @@ function Movies() {
               src={movie.Poster}
               alt={movie.Title}
               objectFit="contain"
-              w="100%"
-              h="100%"
+              w="200px"
+              h="200px"
             />
           )}
           <Box p="4">
