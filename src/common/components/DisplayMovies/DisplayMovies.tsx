@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
+import React from "react";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Movie } from "@/common/types/types";
@@ -18,9 +16,8 @@ const DisplayMovies = ({
 }: DisplayMoviesProps) => {
   const router = useRouter();
   const isFavoriteRoute = router.pathname === "/favorites";
+  const displayWatchedButton = isFavoriteRoute ? "Watched" : null;
 
-  const DisplayButtonText = isFavoriteRoute ? "Remove" : "Favorite";
-  const DisplayWatchedButton = isFavoriteRoute ? "Watched" : null;
   const handleClickFavorite = isFavoriteRoute
     ? handleRemoveFavorite
     : handleAddFavorite;
@@ -64,11 +61,16 @@ const DisplayMovies = ({
             </Flex>
             <Flex>
               <Button fontSize="sm" onClick={() => handleClickFavorite!(movie)}>
-                {DisplayButtonText}
+                {isFavoriteRoute ? "Remove" : "Favorite"}
               </Button>
-              <Button fontSize="sm" onClick={() => handleClickFavorite!(movie)}>
-                {DisplayWatchedButton}
-              </Button>
+              {displayWatchedButton && movie.watched === false && (
+                <Button
+                  fontSize="sm"
+                  onClick={() => handleClickFavorite!(movie)}
+                >
+                  {displayWatchedButton}
+                </Button>
+              )}
             </Flex>
           </Box>
         </VStack>

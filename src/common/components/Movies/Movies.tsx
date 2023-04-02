@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Movie } from "@/common/types/types";
-import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
 import useDebounce from "@/common/hooks/useDebounce";
 
@@ -32,7 +32,6 @@ function Movies({ searchTerm }: MoviesProps) {
       return response.data.Search;
     } catch (error) {
       console.error(error);
-      return [];
     }
   };
 
@@ -51,6 +50,7 @@ function Movies({ searchTerm }: MoviesProps) {
       Type: movie.Type,
       Poster: movie.Poster,
       imdbID: movie.imdbID,
+      watched: false,
     };
     const movies: Movie[] = JSON.parse(
       localStorage.getItem("localStorageMovies") || "[]"
