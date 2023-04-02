@@ -3,16 +3,23 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { Movie } from "@/common/types/types";
 import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
+import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
+import useDebounce from "@/common/hooks/useDebounce";
 
-function Movies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+interface MoviesProps {
+  searchTerm: string;
+}
+
+function Movies({ searchTerm }: MoviesProps) {
+  const debouncedSearchQuery = useDebounce(searchTerm, 2000);
+
   const getMovies = async () => {
     try {
       const response = await axios.get(
         "https://movie-database-alternative.p.rapidapi.com/",
         {
           params: {
-            s: "spiderman",
+            s: `${debouncedSearchQuery}`,
             r: "json",
             page: 1,
           },
@@ -22,14 +29,17 @@ function Movies() {
           },
         }
       );
-      setMovies(response.data.Search);
       return response.data.Search;
     } catch (error) {
       console.error(error);
+      return [];
     }
   };
 
-  const { data, error, isLoading, isError } = useQuery("movies", getMovies);
+  const { data, error, isLoading, isError } = useQuery(
+    ["movies", debouncedSearchQuery],
+    getMovies
+  );
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -68,50 +78,15 @@ function Movies() {
   };
 
   return (
-    <Wrap spacing={5} justify="center">
-      {movies.map((movie) => (
-        <VStack
-          key={movie.imdbID}
-          borderWidth="1px"
-          borderRadius="md"
-          width="100%"
-          maxWidth="400px"
-          maxHeight="400px"
-        >
-          {movie.Poster === "N/A" || movie.Poster === "" ? (
-            <Image
-              boxSize="200px"
-              src="No_image_available.png"
-              alt={movie.Title}
-              w="100%"
-              h="100%"
-            />
-          ) : (
-            <Image
-              boxSize="200px"
-              src={movie.Poster}
-              alt={movie.Title}
-              objectFit="contain"
-              w="200px"
-              h="200px"
-            />
-          )}
-          <Box p="4">
-            <Text fontSize="xl" fontWeight="bold" mb="2">
-              {movie.Title}
-            </Text>
-            <Flex align="center" justify="space-between">
-              <Text fontSize="lg" color="gray.500">
-                {movie.Year}
-              </Text>
-              <Button fontSize="lg" onClick={() => handleAddFavorite(movie)}>
-                Favorite
-              </Button>
-            </Flex>
-          </Box>
-        </VStack>
-      ))}
-    </Wrap>
+    <Box>
+      {!data ? (
+        <Flex align="center" justify="center" mt="4">
+          Search Movies
+        </Flex>
+      ) : (
+        <DisplayMovies movies={data} handleAddFavorite={handleAddFavorite} />
+      )}
+    </Box>
   );
 }
 

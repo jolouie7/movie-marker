@@ -1,8 +1,20 @@
+import { useState } from "react";
 import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import Navbar from "@/common/components/Navbar/Navbar";
+import Movies from "@/common/components/Movies/Movies";
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
+  // OPTIONAL: Using debounce
+  // Have a function that takes user input from search bar
+  //   Does React Query have a way to do this?
+  // Store movies in state here?
+  // Pass movies to Movies component and have it fetch the movies based on search query
+
+  const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
   return (
     <>
       <Head>
@@ -12,8 +24,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Navbar onHandleChange={onHandleChange} />
+        <Box>{searchTerm}</Box>
         <Box>
-          <Navbar />
+          <Box>
+            <Movies searchTerm={searchTerm} />
+          </Box>
         </Box>
       </main>
     </>
