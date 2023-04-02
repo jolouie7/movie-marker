@@ -6,11 +6,6 @@ import Movies from "@/common/components/Movies/Movies";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
-  // OPTIONAL: Using debounce
-  // Have a function that takes user input from search bar
-  //   Does React Query have a way to do this?
-  // Store movies in state here?
-  // Pass movies to Movies component and have it fetch the movies based on search query
 
   const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -25,7 +20,6 @@ export default function Home() {
       </Head>
       <main>
         <Navbar onHandleChange={onHandleChange} />
-        <Box>{searchTerm}</Box>
         <Box>
           <Box>
             <Movies searchTerm={searchTerm} />

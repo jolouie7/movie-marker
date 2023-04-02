@@ -20,6 +20,7 @@ const DisplayMovies = ({
   const isFavoriteRoute = router.pathname === "/favorites";
 
   const DisplayButtonText = isFavoriteRoute ? "Remove" : "Favorite";
+  const DisplayWatchedButton = isFavoriteRoute ? "Watched" : null;
   const handleClickFavorite = isFavoriteRoute
     ? handleRemoveFavorite
     : handleAddFavorite;
@@ -56,12 +57,17 @@ const DisplayMovies = ({
             <Text fontSize="xl" fontWeight="bold" mb="2">
               {movie.Title}
             </Text>
-            <Flex align="center" justify="space-between">
+            <Flex align="center">
               <Text fontSize="lg" color="gray.500">
                 {movie.Year}
               </Text>
-              <Button fontSize="lg" onClick={() => handleClickFavorite!(movie)}>
+            </Flex>
+            <Flex>
+              <Button fontSize="sm" onClick={() => handleClickFavorite!(movie)}>
                 {DisplayButtonText}
+              </Button>
+              <Button fontSize="sm" onClick={() => handleClickFavorite!(movie)}>
+                {DisplayWatchedButton}
               </Button>
             </Flex>
           </Box>
