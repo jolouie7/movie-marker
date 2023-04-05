@@ -22,7 +22,7 @@ export default function Home() {
         <Navbar onHandleChange={onHandleChange} />
         <Box>
           <Box>
-            <Movies searchTerm={searchTerm} />
+            <Movies searchTerm={searchTerm} page="1" />
           </Box>
         </Box>
       </main>
