@@ -5,22 +5,22 @@ import { Movie } from "@/common/types/types";
 
 interface DisplayMoviesProps {
   movies: Movie[];
-  handleAddFavorite?: (movie: Movie) => void;
-  handleRemoveFavorite?: (movie: Movie) => void;
+  handleAddBookmark?: (movie: Movie) => void;
+  handleRemoveBookmark?: (movie: Movie) => void;
 }
 
 const DisplayMovies = ({
   movies,
-  handleAddFavorite,
-  handleRemoveFavorite,
+  handleAddBookmark,
+  handleRemoveBookmark,
 }: DisplayMoviesProps) => {
   const router = useRouter();
-  const isFavoriteRoute = router.pathname === "/favorites";
-  const displayWatchedButton = isFavoriteRoute ? "Watched" : null;
+  const isBookmarkRoute = router.pathname === "/bookmarks";
+  const displayWatchedButton = isBookmarkRoute ? "Watched" : null;
 
-  const handleClickFavorite = isFavoriteRoute
-    ? handleRemoveFavorite
-    : handleAddFavorite;
+  const handleClickBookmark = isBookmarkRoute
+    ? handleRemoveBookmark
+    : handleAddBookmark;
 
   return (
     <Wrap spacing={5} justify="center">
@@ -60,13 +60,13 @@ const DisplayMovies = ({
               </Text>
             </Flex>
             <Flex>
-              <Button fontSize="sm" onClick={() => handleClickFavorite!(movie)}>
-                {isFavoriteRoute ? "Remove" : "Favorite"}
+              <Button fontSize="sm" onClick={() => handleClickBookmark!(movie)}>
+                {isBookmarkRoute ? "Remove" : "Bookmark"}
               </Button>
               {displayWatchedButton && movie.watched === false && (
                 <Button
                   fontSize="sm"
-                  onClick={() => handleClickFavorite!(movie)}
+                  onClick={() => handleClickBookmark!(movie)}
                 >
                   {displayWatchedButton}
                 </Button>

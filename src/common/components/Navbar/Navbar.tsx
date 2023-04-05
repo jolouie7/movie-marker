@@ -30,7 +30,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
         {/* <Tabs>
           <TabList>
             <Tab>Home</Tab>
-            <Tab>Favorites</Tab>
+            <Tab>Bookmarks</Tab>
           </TabList>
         </Tabs> */}
         <ul>
@@ -38,7 +38,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/favorites">Favorites</Link>
+            <Link href="/bookmarks">Bookmarks</Link>
           </li>
         </ul>
       </Flex>
