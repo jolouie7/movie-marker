@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Movie } from "@/common/types/types";
-import { Box, Flex, Button, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
 import useDebounce from "@/common/hooks/useDebounce";
 import Pagination from "@/common/components/Pagination/Pagination";
@@ -14,7 +14,7 @@ interface MoviesProps {
 function Movies({ searchTerm }: MoviesProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const debouncedSearchQuery = useDebounce(searchTerm, 2000);
+  const debouncedSearchQuery = useDebounce(searchTerm, 1000); // 1 second
 
   const getMovies = async (page: number) => {
     try {
