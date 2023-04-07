@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Movie } from "@/common/types/types";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
 import useDebounce from "@/common/hooks/useDebounce";
 import Pagination from "@/common/components/Pagination/Pagination";
-import { useToast } from "@chakra-ui/react";
 
 interface MoviesProps {
   searchTerm: string;
@@ -113,7 +112,12 @@ function Movies({ searchTerm }: MoviesProps) {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <Flex justify="center" align="center">
+        <Spinner size="lg" />
+      </Flex>
+    );
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
