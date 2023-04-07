@@ -6,6 +6,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
 import useDebounce from "@/common/hooks/useDebounce";
 import Pagination from "@/common/components/Pagination/Pagination";
+import { useToast } from "@chakra-ui/react";
 
 interface MoviesProps {
   searchTerm: string;
@@ -15,6 +16,7 @@ function Movies({ searchTerm }: MoviesProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const debouncedSearchQuery = useDebounce(searchTerm, 1000); // 1 second
+  const toast = useToast();
 
   const getMovies = async (page: number) => {
     try {
@@ -77,6 +79,12 @@ function Movies({ searchTerm }: MoviesProps) {
         "localStorageMovies",
         JSON.stringify([favoriteMovie])
       );
+      toast({
+        title: `${favoriteMovie.Title} added to Bookmarks.`,
+        status: "success",
+        duration: 7000,
+        isClosable: true,
+      });
     }
     // If 'movie' is in localStorage, add current movie to the array
     else {
@@ -87,8 +95,20 @@ function Movies({ searchTerm }: MoviesProps) {
       ) {
         movies.push(favoriteMovie);
         localStorage.setItem("localStorageMovies", JSON.stringify(movies));
+        toast({
+          title: `${favoriteMovie.Title} added to Bookmarks.`,
+          status: "success",
+          duration: 7000,
+          isClosable: true,
+        });
       } else {
         console.log("Movie already exists in Bookmarks.");
+        toast({
+          title: "Movie already exists in Bookmarks.",
+          status: "info",
+          duration: 7000,
+          isClosable: true,
+        });
       }
     }
   };

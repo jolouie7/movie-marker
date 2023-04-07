@@ -23,7 +23,7 @@ const DisplayMovies = ({
     : handleAddBookmark;
 
   return (
-    <Wrap spacing={5} justify="center">
+    <Wrap spacing="5" justify="center">
       {movies.map((movie) => (
         <VStack
           key={movie.imdbID}
