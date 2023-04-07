@@ -8,32 +8,32 @@ interface PaginationProps {
 }
 
 function Pagination({ currentPage, totalPages, goToPage }: PaginationProps) {
-  function handlePrevClick() {
+  const handlePrevClick = () => {
     if (currentPage <= 1) return;
     goToPage(currentPage - 1);
     window.scrollTo({
       top: 0,
     });
-  }
+  };
 
-  function handleNextClick() {
+  const handleNextClick = () => {
     if (currentPage >= totalPages) return;
     goToPage(currentPage + 1);
     window.scrollTo({
       top: 0,
     });
-  }
+  };
 
-  function handleFirstClick() {
+  const handleFirstClick = () => {
     goToPage(1);
-  }
+  };
 
-  function handleLastClick() {
+  const handleLastClick = () => {
     goToPage(totalPages);
-  }
+  };
 
   return (
-    <Flex justifyContent="center" align="center" mt="4">
+    <Flex justifyContent="center" align="center" my="8" gap="2">
       <Button
         size="sm"
         colorScheme="blue"
