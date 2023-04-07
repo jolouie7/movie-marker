@@ -20,10 +20,8 @@ export default function Home() {
       </Head>
       <main>
         <Navbar onHandleChange={onHandleChange} />
-        <Box>
-          <Box>
-            <Movies searchTerm={searchTerm} />
-          </Box>
+        <Box mt="100">
+          <Movies searchTerm={searchTerm} />
         </Box>
       </main>
     </>
