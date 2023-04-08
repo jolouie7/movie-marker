@@ -25,29 +25,19 @@ const DisplayMovies = ({
   return (
     <Wrap spacing="5" justify="center">
       {movies.map((movie) => (
-        <VStack
-          key={movie.imdbID}
-          borderWidth="1px"
-          borderRadius="md"
-          width="100%"
-          maxWidth="400px"
-        >
+        <VStack key={movie.imdbID} w="100%" maxW="400px" minW="300">
           {movie.Poster === "N/A" || movie.Poster === "" ? (
             <Image
-              boxSize="200px"
+              boxSize="400px"
               src="No_image_available.png"
               alt={movie.Title}
-              w="100%"
-              h="100%"
             />
           ) : (
             <Image
-              boxSize="200px"
+              boxSize="400px"
               src={movie.Poster}
               alt={movie.Title}
               objectFit="contain"
-              w="100%"
-              h="100%"
             />
           )}
           <Box p="4">
@@ -60,14 +50,11 @@ const DisplayMovies = ({
               </Text>
             </Flex>
             <Flex>
-              <Button fontSize="sm" onClick={() => handleClickBookmark!(movie)}>
+              <Button size="sm" onClick={() => handleClickBookmark!(movie)}>
                 {isBookmarkRoute ? "Remove" : "Bookmark"}
               </Button>
               {displayWatchedButton && movie.watched === false && (
-                <Button
-                  fontSize="sm"
-                  onClick={() => handleClickBookmark!(movie)}
-                >
+                <Button size="sm" onClick={() => handleClickBookmark!(movie)}>
                   {displayWatchedButton}
                 </Button>
               )}
