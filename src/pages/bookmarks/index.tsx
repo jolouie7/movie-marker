@@ -6,9 +6,6 @@ import { Movie } from "@/common/types/types";
 import { useToast } from "@chakra-ui/react";
 
 export default function Bookmarks() {
-  // TODO:
-  // Remove the search bar from the navbar in bookmarks page because you can't search for movies in bookmarks page
-  // It might be mistaken for searching through your bookmarks
   const [movies, setMovies] = useState<Movie[]>([]);
   const toast = useToast();
 
