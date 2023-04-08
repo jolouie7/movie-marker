@@ -8,8 +8,9 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    setSearchTerm(e.target.value.trim());
   };
+
   return (
     <>
       <Head>
