@@ -1,39 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Movie Marker
+
+Movie Marker is a web application that allows users to search for movies and bookmark their favorite ones for later viewing.
+
+Here is the Live Site: https://movie-marker.vercel.app/
 
 ## Getting Started
 
-First, run the development server:
+To get started with the app, first clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+git clone git@github.com:jolouie7/movie-marker.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, navigate into the project directory and install the necessary dependencies:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+cd movie-marker
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+After installing the dependencies, start the development server:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The app should now be running at http://localhost:3000.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Search for movies**: Users can search for movies using the search bar at the top of the page. Results are displayed in a grid of movie posters, with each poster displaying the movie's title, year of release, and a bookmark button.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Bookmark movies**: Users can bookmark movies for later viewing by clicking on the bookmark button on the movie poster.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **View bookmarks**: Users can view their bookmarked movies by clicking on the "Bookmarks" link in the navigation bar.
 
-## Deploy on Vercel
+- **Remove bookmarks**: Users can remove bookmarks by clicking on the "remove" button on the bookmarked movie poster.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Testing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# movie-marker
+The app includes a suite of Jest and React Testing Library tests to ensure that the components and functions are working correctly. To run the tests, use the command:
+
+```
+npm run test
+```
+
+## Technologies Used
+
+- Next.js
+- Chakra UI
+- Typescript
+- React Query
+
+## Future Features
+
+- Notes for why you bookmarked a movie
+- Add a database
+- A share link to share your list of bookmarked movies
+- Dark mode
