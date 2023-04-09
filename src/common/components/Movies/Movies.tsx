@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { Movie } from "@/common/types/types";
 import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
 import useDebounce from "@/common/hooks/useDebounce";
 import Pagination from "@/common/components/Pagination/Pagination";
+import { useMoviesQuery } from "@/common/hooks/useMoviesQuery";
 
 interface MoviesProps {
   searchTerm: string;
@@ -17,35 +16,9 @@ function Movies({ searchTerm }: MoviesProps) {
   const debouncedSearchQuery = useDebounce(searchTerm, 1000); // 1 second
   const toast = useToast();
 
-  const getMovies = async (page: number) => {
-    try {
-      const response = await axios.get(
-        "https://movie-database-alternative.p.rapidapi.com/",
-        {
-          params: {
-            s: debouncedSearchQuery,
-            r: "json",
-            page: page,
-          },
-          headers: {
-            "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
-            "X-RapidAPI-Host": "movie-database-alternative.p.rapidapi.com",
-          },
-        }
-      );
-      console.log("response.data.Search: ", response.data.Search);
-      return {
-        Search: response.data.Search,
-        totalResults: response.data.totalResults,
-      };
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const { data, error, isLoading, isError } = useQuery(
-    ["movies", debouncedSearchQuery, currentPage],
-    () => getMovies(currentPage)
+  const { data, error, isLoading, isError } = useMoviesQuery(
+    debouncedSearchQuery,
+    currentPage
   );
 
   useEffect(() => {
