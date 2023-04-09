@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Box,
   Flex,
@@ -29,7 +29,7 @@ interface NavbarProps {
 const Navbar = ({ onHandleChange }: NavbarProps) => {
   const bg = useColorModeValue("white", "gray.800");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = useRef<HTMLButtonElement>(null);
   return (
     <>
       <chakra.header
