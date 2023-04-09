@@ -118,7 +118,7 @@ function Movies({ searchTerm }: MoviesProps) {
         <Spinner size="lg" />
       </Flex>
     );
-  if (isError) return <div>Error: {error.message}</div>;
+  if (isError) return <div>Error: {(error as Error)?.message}</div>;
 
   return (
     <Box>
