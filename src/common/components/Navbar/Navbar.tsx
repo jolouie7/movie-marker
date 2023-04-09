@@ -23,7 +23,7 @@ import { SearchIcon, HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 import { IoHome } from "react-icons/io5";
 
 interface NavbarProps {
-  onHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onHandleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Navbar = ({ onHandleChange }: NavbarProps) => {
