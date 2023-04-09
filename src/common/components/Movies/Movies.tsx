@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { Movie } from "@/common/types/types";
 import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
