@@ -21,19 +21,20 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon, HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 import { IoHome } from "react-icons/io5";
+import { useRouter } from "next/router";
 
 interface NavbarProps {
-  onHandleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Navbar = ({ onHandleChange }: NavbarProps) => {
-  const bg = useColorModeValue("white", "gray.800");
+  const router = useRouter();
+  const isBookmarkRoute = router.pathname === "/bookmarks";
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   return (
     <>
       <chakra.header
-        bg={bg}
         w="full"
         px={{ base: 2, sm: 4 }}
         py="4"
@@ -49,6 +50,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
               title="Movie Marker"
               display="flex"
               alignItems="center"
+              ml="4"
             >
               <Box>Movie Marker</Box>
             </chakra.a>
@@ -78,12 +80,14 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
           </HStack>
 
           <HStack spacing="3">
-            <InputGroup>
-              <InputLeftElement pointerEvents="none">
-                <SearchIcon />
-              </InputLeftElement>
-              <Input placeholder="Search..." onChange={onHandleChange} />
-            </InputGroup>
+            {!isBookmarkRoute && (
+              <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                  <SearchIcon />
+                </InputLeftElement>
+                <Input placeholder="Search..." onChange={onHandleChange} />
+              </InputGroup>
+            )}
 
             <IconButton
               display={{ base: "flex", md: "none" }}
