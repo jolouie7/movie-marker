@@ -56,6 +56,12 @@ export default function Bookmarks() {
         "localStorageWatchedMovies",
         JSON.stringify([...localStorageWatchedMovies, movieToWatch])
       );
+      toast({
+        title: `${movie.Title} added to watched.`,
+        status: "success",
+        duration: 7000,
+        isClosable: true,
+      });
       setMovies(filteredMovies);
     } catch (error) {
       console.error(error);
