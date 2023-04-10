@@ -21,25 +21,18 @@ interface DisplayMoviesContentProps {
   movies: Movie[];
   handleAddBookmark?: (movie: Movie) => void;
   handleRemoveBookmark?: (movie: Movie) => void;
+  handleWatchMovie?: (movie: Movie) => void;
+  watchedMovie?: (movie: Movie) => void;
 }
 
 const DisplayMoviesContent = ({
   movies,
   handleAddBookmark,
   handleRemoveBookmark,
+  handleWatchMovie,
 }: DisplayMoviesContentProps) => {
   const router = useRouter();
   const isBookmarkRoute = router.pathname === "/bookmarks";
-  const displayWatchedButton = isBookmarkRoute ? "Watched" : null;
-
-  const handleClickBookmark = isBookmarkRoute
-    ? handleRemoveBookmark
-    : handleAddBookmark;
-
-  const handleRemove = (movie: any) => {
-    console.log(movie.Title);
-    handleRemoveBookmark!(movie);
-  };
 
   return (
     <Wrap spacing="5" justify="center">
@@ -69,17 +62,17 @@ const DisplayMoviesContent = ({
               </Text>
             </Flex>
             <Flex justify="space-between">
-              {displayWatchedButton && movie.watched === false && (
+              {movie.watched === false && movie && (
                 <Button
                   size="sm"
                   colorScheme="green"
-                  onClick={() => handleClickBookmark!(movie)}
+                  onClick={() => handleWatchMovie!(movie)}
                 >
-                  {displayWatchedButton}
+                  {isBookmarkRoute && "Watched"}
                 </Button>
               )}
-              {isBookmarkRoute ? (
-                <Popover>
+              {isBookmarkRoute && movie ? (
+                <Popover placement="top-start">
                   <PopoverTrigger>
                     <Button size="sm" colorScheme="red">
                       Remove
@@ -95,7 +88,7 @@ const DisplayMoviesContent = ({
                       <Button
                         size="sm"
                         colorScheme="red"
-                        onClick={() => handleRemove(movie)}
+                        onClick={() => handleRemoveBookmark!(movie)}
                       >
                         Remove
                       </Button>

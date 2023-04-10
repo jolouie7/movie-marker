@@ -27,6 +27,41 @@ export default function Bookmarks() {
       isClosable: true,
     });
   };
+
+  const handleWatchMovie = (movie: Movie) => {
+    try {
+      // Get both localStorageMovies and localStorageWatchedMovies
+      const localStorageMovies: Movie[] = JSON.parse(
+        localStorage.getItem("localStorageMovies") || "[]"
+      );
+      const localStorageWatchedMovies: Movie[] = JSON.parse(
+        localStorage.getItem("localStorageWatchedMovies") || "[]"
+      );
+
+      // Find the movie in localStorageMovies and remove it
+      const movieToWatch = localStorageMovies.find(
+        (localStorageMovie: Movie) => localStorageMovie.imdbID === movie.imdbID
+      );
+      const filteredMovies: Movie[] = localStorageMovies.filter(
+        (localStorageMovie: Movie) => localStorageMovie.imdbID !== movie.imdbID
+      );
+      movieToWatch!.watched = true;
+
+      // Update localStorageMovies and localStorageWatchedMovies
+      localStorage.setItem(
+        "localStorageMovies",
+        JSON.stringify(filteredMovies)
+      );
+      localStorage.setItem(
+        "localStorageWatchedMovies",
+        JSON.stringify([...localStorageWatchedMovies, movieToWatch])
+      );
+      setMovies(filteredMovies);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Box>
@@ -34,6 +69,7 @@ export default function Bookmarks() {
           <DisplayMoviesContent
             movies={movies}
             handleRemoveBookmark={handleRemoveBookmark}
+            handleWatchMovie={handleWatchMovie}
           />
         ) : (
           <Flex align="center" justify="center" mt="4">
