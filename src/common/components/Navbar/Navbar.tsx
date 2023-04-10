@@ -78,6 +78,16 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
                   Bookmarks
                 </Button>
               </Link>
+              <Link href="/watched">
+                <Button
+                  variant="ghost"
+                  onClick={onClose}
+                  aria-label={"Bookmarks button"}
+                  leftIcon={<StarIcon />}
+                >
+                  Watched
+                </Button>
+              </Link>
             </HStack>
           </HStack>
 
@@ -130,6 +140,16 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
                     leftIcon={<StarIcon />}
                   >
                     Bookmarks
+                  </Button>
+                </Link>
+                <Link href="/watched">
+                  <Button
+                    variant="ghost"
+                    onClick={onClose}
+                    aria-label={"Bookmarks button"}
+                    leftIcon={<StarIcon />}
+                  >
+                    Watched
                   </Button>
                 </Link>
               </DrawerContent>
