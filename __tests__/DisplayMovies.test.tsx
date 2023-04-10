@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
+import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -9,7 +9,7 @@ jest.mock("next/router", () => ({
   }),
 }));
 
-describe("DisplayMovies component", () => {
+describe("DisplayMoviesContent component", () => {
   const movies = [
     {
       imdbID: "1",
@@ -35,12 +35,12 @@ describe("DisplayMovies component", () => {
   ];
 
   it("renders without errors", () => {
-    render(<DisplayMovies movies={movies} />);
+    render(<DisplayMoviesContent movies={movies} />);
     expect(screen.getByRole("img", { name: /Movie 1/i })).toBeInTheDocument();
   });
 
   it("displays the correct number of movies", () => {
-    render(<DisplayMovies movies={movies} />);
+    render(<DisplayMoviesContent movies={movies} />);
     expect(screen.getAllByRole("img")).toHaveLength(3);
   });
 
@@ -61,7 +61,7 @@ describe("DisplayMovies component", () => {
         Type: "movie",
       },
     ];
-    render(<DisplayMovies movies={noPosterMovies} />);
+    render(<DisplayMoviesContent movies={noPosterMovies} />);
     const moviePoster1 = screen.getByRole("img", { name: /Movie 1/i });
     const moviePoster2 = screen.getByRole("img", { name: /Movie 2/i });
     expect(moviePoster1).toHaveAttribute("src", "No_image_available.png");
@@ -80,7 +80,10 @@ describe("DisplayMovies component", () => {
     ];
     const handleAddBookmark = jest.fn();
     render(
-      <DisplayMovies movies={oneMovie} handleAddBookmark={handleAddBookmark} />
+      <DisplayMoviesContent
+        movies={oneMovie}
+        handleAddBookmark={handleAddBookmark}
+      />
     );
     const bookmarkButton = screen.getAllByRole("button", {
       name: /bookmark/i,
