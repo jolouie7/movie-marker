@@ -4,5 +4,5 @@ export interface Movie {
   Type: string;
   Poster: string;
   imdbID: string;
-  watched?: boolean;
+  watched: boolean;
 }
