@@ -1,16 +1,12 @@
-import { useState } from "react";
 import Head from "next/head";
 import { Box } from "@chakra-ui/react";
-import Navbar from "@/common/components/Navbar/Navbar";
 import MoviesContainer from "@/common/components/MoviesContainer/MoviesContainer";
 
-export default function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
+interface HomeProps {
+  searchTerm: string;
+}
 
-  const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value.trim());
-  };
-
+export default function Home({ searchTerm }: HomeProps) {
   return (
     <>
       <Head>
@@ -20,8 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar onHandleChange={onHandleChange} />
-        <Box mt="100">
+        <Box>
           <MoviesContainer searchTerm={searchTerm} />
         </Box>
       </main>

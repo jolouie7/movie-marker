@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "@/common/components/Navbar/Navbar";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
 import { Movie } from "@/common/types/types";
@@ -30,8 +29,7 @@ export default function Bookmarks() {
   };
   return (
     <>
-      <Navbar />
-      <Box mt="100">
+      <Box>
         {movies.length > 0 ? (
           <DisplayMoviesContent
             movies={movies}
