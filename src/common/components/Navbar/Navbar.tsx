@@ -32,6 +32,8 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
   const bg = useColorModeValue("white", "gray.800");
   const router = useRouter();
   const isBookmarkRoute = router.pathname === "/bookmarks";
+  const isBookmarkOrWatchedRoute =
+    router.pathname === "/bookmarks" || router.pathname === "/watched";
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   return (
@@ -93,7 +95,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
           </HStack>
 
           <HStack spacing="3">
-            {!isBookmarkRoute && (
+            {!isBookmarkOrWatchedRoute && (
               <InputGroup>
                 <InputLeftElement pointerEvents="none">
                   <SearchIcon />
