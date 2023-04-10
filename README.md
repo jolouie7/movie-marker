@@ -4,6 +4,12 @@ Movie Marker is a web application that allows users to search for movies and boo
 
 Here is the Live Site: https://movie-marker.vercel.app/
 
+## Mobile Screenshots:
+
+![Home](public/Home.png)
+![Bookmark Page](public/Bookmark.png)
+![Watched Page](public/Watched.png)
+
 ## Getting Started
 
 To get started with the app, first clone the repository:
@@ -29,13 +35,15 @@ The app should now be running at http://localhost:3000.
 
 ## Features
 
-- **Search for movies**: Users can search for movies using the search bar at the top of the page. Results are displayed in a grid of movie posters, with each poster displaying the movie's title, year of release, and a bookmark button.
+- **Search for movies**: Users can search for movies using the search bar in the navbar. Results display the movie's poster, title, and year of release.
 
-- **Bookmark movies**: Users can bookmark movies for later viewing by clicking on the bookmark button on the movie poster.
+- **Bookmark movies**: Users can bookmark movies for later viewing.
 
-- **View bookmarks**: Users can view their bookmarked movies by clicking on the "Bookmarks" link in the navigation bar.
+- **View bookmarks**: Users can view their bookmarked movies.
 
-- **Remove bookmarks**: Users can remove bookmarks by clicking on the "remove" button on the bookmarked movie poster.
+- **Remove bookmarks**: Users can remove bookmarks.
+
+- **Add to Watched List**: Users can add to a watched list.
 
 ## Testing
 
@@ -52,9 +60,10 @@ npm run test
 - Typescript
 - React Query
 
-## Future Features
+## Future Improvements
 
 - Notes for why you bookmarked a movie
 - Add a database
 - A share link to share your list of bookmarked movies
 - Dark mode
+- Use of better colors and typography
