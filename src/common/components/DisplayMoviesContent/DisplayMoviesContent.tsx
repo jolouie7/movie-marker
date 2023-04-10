@@ -3,17 +3,17 @@ import { VStack, Image, Box, Text, Flex, Wrap, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Movie } from "@/common/types/types";
 
-interface DisplayMoviesProps {
+interface DisplayMoviesContentProps {
   movies: Movie[];
   handleAddBookmark?: (movie: Movie) => void;
   handleRemoveBookmark?: (movie: Movie) => void;
 }
 
-const DisplayMovies = ({
+const DisplayMoviesContent = ({
   movies,
   handleAddBookmark,
   handleRemoveBookmark,
-}: DisplayMoviesProps) => {
+}: DisplayMoviesContentProps) => {
   const router = useRouter();
   const isBookmarkRoute = router.pathname === "/bookmarks";
   const displayWatchedButton = isBookmarkRoute ? "Watched" : null;
@@ -66,4 +66,4 @@ const DisplayMovies = ({
   );
 };
 
-export default DisplayMovies;
+export default DisplayMoviesContent;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import Navbar from "@/common/components/Navbar/Navbar";
-import Movies from "@/common/components/Movies/Movies";
+import MoviesContainer from "@/common/components/MoviesContainer/MoviesContainer";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +22,7 @@ export default function Home() {
       <main>
         <Navbar onHandleChange={onHandleChange} />
         <Box mt="100">
-          <Movies searchTerm={searchTerm} />
+          <MoviesContainer searchTerm={searchTerm} />
         </Box>
       </main>
     </>

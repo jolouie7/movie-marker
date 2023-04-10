@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Movie } from "@/common/types/types";
 import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
-import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
+import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
 import useDebounce from "@/common/hooks/useDebounce";
 import Pagination from "@/common/components/Pagination/Pagination";
 import { useMoviesQuery } from "@/common/hooks/useMoviesQuery";
 
-interface MoviesProps {
+interface MoviesContainerProps {
   searchTerm: string;
 }
 
-function Movies({ searchTerm }: MoviesProps) {
+function MoviesContainer({ searchTerm }: MoviesContainerProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const debouncedSearchQuery = useDebounce(searchTerm, 1000); // 1 second
@@ -84,7 +84,7 @@ function Movies({ searchTerm }: MoviesProps) {
         </Flex>
       ) : (
         <>
-          <DisplayMovies
+          <DisplayMoviesContent
             movies={data.Search}
             handleAddBookmark={handleAddBookmark}
           />
@@ -101,4 +101,4 @@ function Movies({ searchTerm }: MoviesProps) {
   );
 }
 
-export default Movies;
+export default MoviesContainer;

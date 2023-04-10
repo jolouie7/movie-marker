@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/common/components/Navbar/Navbar";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import DisplayMovies from "@/common/components/DisplayMovies/DisplayMovies";
+import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
 import { Movie } from "@/common/types/types";
 import { useToast } from "@chakra-ui/react";
 
@@ -33,7 +33,7 @@ export default function Bookmarks() {
       <Navbar />
       <Box mt="100">
         {movies.length > 0 ? (
-          <DisplayMovies
+          <DisplayMoviesContent
             movies={movies}
             handleRemoveBookmark={handleRemoveBookmark}
           />
