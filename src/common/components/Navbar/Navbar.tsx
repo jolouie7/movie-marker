@@ -28,6 +28,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ onHandleChange }: NavbarProps) => {
+  const bg = useColorModeValue("white", "gray.800");
   const router = useRouter();
   const isBookmarkRoute = router.pathname === "/bookmarks";
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,6 +36,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
   return (
     <>
       <chakra.header
+        bg={bg}
         w="full"
         px={{ base: 2, sm: 4 }}
         py="4"
