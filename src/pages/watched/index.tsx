@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
 import { Movie } from "@/common/types/types";
-import { useToast } from "@chakra-ui/react";
 
 function WatchedMovies() {
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>([]);
-  const toast = useToast();
 
   useEffect(() => {
     setWatchedMovies(
