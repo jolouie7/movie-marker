@@ -45,43 +45,26 @@ function Movies({ searchTerm }: MoviesProps) {
     const movies: Movie[] = JSON.parse(
       localStorage.getItem("localStorageMovies") || "[]"
     );
-    // If 'movie' is not in localStorage, add it
-    if (movies.length === 0) {
-      localStorage.setItem(
-        "localStorageMovies",
-        JSON.stringify([favoriteMovie])
-      );
+
+    // Add to bookmarks if it doesn't exist
+    if (
+      !movies.some((storedMovie: Movie) => storedMovie.imdbID === movie.imdbID)
+    ) {
+      movies.push(favoriteMovie);
+      localStorage.setItem("localStorageMovies", JSON.stringify(movies));
       toast({
         title: `${favoriteMovie.Title} added to Bookmarks.`,
         status: "success",
         duration: 7000,
         isClosable: true,
       });
-    }
-    // If 'movie' is in localStorage, add current movie to the array
-    else {
-      if (
-        !movies.some(
-          (storedMovie: Movie) => storedMovie.imdbID === movie.imdbID
-        )
-      ) {
-        movies.push(favoriteMovie);
-        localStorage.setItem("localStorageMovies", JSON.stringify(movies));
-        toast({
-          title: `${favoriteMovie.Title} added to Bookmarks.`,
-          status: "success",
-          duration: 7000,
-          isClosable: true,
-        });
-      } else {
-        console.log("Movie already exists in Bookmarks.");
-        toast({
-          title: "Movie already exists in Bookmarks.",
-          status: "info",
-          duration: 7000,
-          isClosable: true,
-        });
-      }
+    } else {
+      toast({
+        title: "Movie already exists in Bookmarks.",
+        status: "info",
+        duration: 7000,
+        isClosable: true,
+      });
     }
   };
 
