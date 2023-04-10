@@ -22,6 +22,7 @@ import {
 import { SearchIcon, HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 import { IoHome } from "react-icons/io5";
 import { useRouter } from "next/router";
+import { RiMovieFill } from "react-icons/ri";
 
 interface NavbarProps {
   onHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -82,8 +83,8 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
                 <Button
                   variant="ghost"
                   onClick={onClose}
-                  aria-label={"Bookmarks button"}
-                  leftIcon={<StarIcon />}
+                  aria-label={"Watched button"}
+                  leftIcon={<RiMovieFill />}
                 >
                   Watched
                 </Button>
@@ -147,7 +148,7 @@ const Navbar = ({ onHandleChange }: NavbarProps) => {
                     variant="ghost"
                     onClick={onClose}
                     aria-label={"Bookmarks button"}
-                    leftIcon={<StarIcon />}
+                    leftIcon={<RiMovieFill />}
                   >
                     Watched
                   </Button>
