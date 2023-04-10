@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import DisplayMoviesContent from "@/common/components/DisplayMoviesContent/DisplayMoviesContent";
@@ -16,7 +17,7 @@ function WatchedMovies() {
     <>
       {watchedMovies.length > 0 ? (
         <Box>
-          <Flex align="center" justify="center" mb="4">
+          <Flex align="center" justify="center" mb="4" fontSize="4xl">
             Watched Movies
           </Flex>
           <DisplayMoviesContent

@@ -72,11 +72,16 @@ export default function Bookmarks() {
     <>
       <Box>
         {movies.length > 0 ? (
-          <DisplayMoviesContent
-            movies={movies}
-            handleRemoveBookmark={handleRemoveBookmark}
-            handleWatchMovie={handleWatchMovie}
-          />
+          <Box>
+            <Flex align="center" justify="center" mb="4" fontSize="4xl">
+              Bookmarked Movies
+            </Flex>
+            <DisplayMoviesContent
+              movies={movies}
+              handleRemoveBookmark={handleRemoveBookmark}
+              handleWatchMovie={handleWatchMovie}
+            />
+          </Box>
         ) : (
           <Flex align="center" justify="center" mt="4">
             <Text>No movies in bookmarks</Text>
