@@ -65,7 +65,8 @@ const DisplayMoviesContent = ({
               {movie.watched === false && movie && (
                 <Button
                   size="sm"
-                  colorScheme="green"
+                  textColor="#FFFFFF"
+                  bgColor="#222222"
                   onClick={() => handleWatchMovie!(movie)}
                 >
                   {isBookmarkRoute && "Watched"}
